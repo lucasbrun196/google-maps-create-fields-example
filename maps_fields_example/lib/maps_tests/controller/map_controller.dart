@@ -30,4 +30,26 @@ class MapController extends Cubit<MapState> {
           mapStatus: MapStatus.success, polylines: state.polylines));
     }
   }
+
+  void createPolyline(LatLng argument) {
+    emit(state.copyWith(mapStatus: MapStatus.loading));
+    if (state.polylines!.polylineId.value == "initialPolyline") {
+      Polyline polyline = Polyline(
+        polylineId: PolylineId('polylineId'),
+        color: Colors.black,
+        width: 2,
+        points: [argument],
+      );
+      emit(state.copyWith(
+        polylines: polyline,
+      ));
+    } else {
+      List<LatLng> oldPoints = List.from(state.polylines!.points)
+        ..add(argument);
+      Polyline existingPolyline =
+          state.polylines!.copyWith(pointsParam: oldPoints);
+      emit(state.copyWith(polylines: existingPolyline));
+    }
+    emit(state.copyWith(mapStatus: MapStatus.success));
+  }
 }
