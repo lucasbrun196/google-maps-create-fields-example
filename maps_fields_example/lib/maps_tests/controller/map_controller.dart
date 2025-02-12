@@ -5,6 +5,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'map_state.dart';
 
+/*
+
+
+TO DO:
+          1: REFACTORING THE CODE
+          2: CORRECT THE VARIABLE NAMES
+          3: PREVENT ERROR
+
+          
+*/
+
 class MapController extends Cubit<MapState> {
   MapController() : super(MapState.initial());
 
